@@ -36,9 +36,7 @@ export function Footer() {
         <div className="mt-8 pt-8 border-t border-[#e5e2dc] flex flex-col sm:flex-row justify-between items-center gap-4 text-sm text-[#3d4446]">
           <span>{t.footer.copyright}</span>
           <div className="flex gap-5">
-            <a href="https://equa.app/datenschutz" target="_blank" rel="noopener noreferrer" className="hover:text-[#059669] transition-colors">{t.footer.privacy}</a>
-            <a href="https://equa.app/agb" target="_blank" rel="noopener noreferrer" className="hover:text-[#059669] transition-colors">{t.footer.terms}</a>
-            <a href="mailto:support@equa.app" className="hover:text-[#059669] transition-colors">Support</a>
+            <a href="mailto:info@useequa.com" className="hover:text-[#059669] transition-colors">Support-Contact</a>
           </div>
         </div>
       </div>

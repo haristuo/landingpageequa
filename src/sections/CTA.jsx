@@ -1,9 +1,8 @@
 import { motion } from 'framer-motion'
 import { Button } from '../components/Button'
 import { useLang } from '../LanguageContext'
-
 export function CTA() {
-  const { t, lang } = useLang()
+  const { t } = useLang()
 
   return (
     <section id="cta" className="py-20 md:py-28 px-6">
@@ -40,13 +39,7 @@ export function CTA() {
           </Button>
         </div>
         <div className="flex flex-wrap justify-center gap-5 text-sm text-[#3d4446]">
-          <a href="mailto:support@equa.app" className="hover:text-[#2d6b5a] transition-colors">Support</a>
-          <a href="https://equa.app/agb" target="_blank" rel="noopener noreferrer" className="hover:text-[#2d6b5a] transition-colors">
-            {lang === 'de' ? 'AGB' : 'Terms'}
-          </a>
-          <a href="https://equa.app/datenschutz" target="_blank" rel="noopener noreferrer" className="hover:text-[#2d6b5a] transition-colors">
-            {lang === 'de' ? 'Datenschutz' : 'Privacy'}
-          </a>
+          <a href="mailto:info@useequa.com" className="hover:text-[#2d6b5a] transition-colors">Support-Contact</a>
         </div>
       </motion.div>
     </section>
