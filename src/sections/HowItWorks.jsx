@@ -1,23 +1,29 @@
 import { motion } from 'framer-motion'
 import { Section } from '../components/Section'
 import { useLang } from '../LanguageContext'
+import { IconRecord, IconSplit, IconTarget, IconChart } from '../components/MinimalIcons'
 
 const STEP_META = [
-  { color: '#10b981', emoji: '\u{1F4DD}' },
-  { color: '#06b6d4', emoji: '\u2696\uFE0F' },
-  { color: '#f59e0b', emoji: '\u{1F3AF}', badge: 'Pro' },
-  { color: '#6366f1', emoji: '\u{1F4CA}' },
+  { color: '#10b981', Icon: IconRecord },
+  { color: '#06b6d4', Icon: IconSplit },
+  { color: '#f59e0b', Icon: IconTarget, badge: 'Pro' },
+  { color: '#6366f1', Icon: IconChart },
 ]
 
 export function HowItWorks() {
   const { t } = useLang()
 
-  const steps = t.howItWorks.steps.map((step, i) => ({
-    num: i + 1,
-    title: step.title,
-    description: step.desc,
-    ...STEP_META[i],
-  }))
+  const steps = t.howItWorks.steps.map((step, i) => {
+    const meta = STEP_META[i]
+    return {
+      num: i + 1,
+      title: step.title,
+      description: step.desc,
+      color: meta.color,
+      Icon: meta.Icon,
+      badge: meta.badge,
+    }
+  })
 
   return (
     <Section
@@ -26,7 +32,9 @@ export function HowItWorks() {
       subtitle={t.howItWorks.subheading}
     >
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-4">
-        {steps.map((step, i) => (
+        {steps.map((step, i) => {
+          const StepIcon = step.Icon
+          return (
           <motion.div
             key={step.num}
             className="relative text-center group"
@@ -44,12 +52,12 @@ export function HowItWorks() {
               whileHover={{ y: -6, boxShadow: '0 20px 40px rgba(0,0,0,0.1)' }}
             >
               <motion.div
-                className="w-14 h-14 mx-auto mb-5 rounded-2xl flex items-center justify-center text-white font-heading font-bold text-lg shadow-lg"
+                className="w-14 h-14 mx-auto mb-5 rounded-2xl flex items-center justify-center text-white shadow-lg"
                 style={{ backgroundColor: step.color, boxShadow: `0 8px 24px ${step.color}33` }}
-                whileHover={{ scale: 1.1, rotate: 5 }}
+                whileHover={{ scale: 1.08 }}
                 transition={{ type: 'spring', stiffness: 400 }}
               >
-                <span className="text-2xl">{step.emoji}</span>
+                <StepIcon className="w-7 h-7" />
               </motion.div>
 
               {step.badge && (
@@ -66,7 +74,8 @@ export function HowItWorks() {
               </p>
             </motion.div>
           </motion.div>
-        ))}
+          )
+        })}
       </div>
     </Section>
   )

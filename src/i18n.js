@@ -43,10 +43,7 @@ export const translations = {
       ],
     },
     appPreview: {
-      screens: [
-        { label: 'Dashboard', desc: 'Alle Ausgaben auf einen Blick' },
-        { label: 'Statistiken', desc: 'Ausgaben-Trends und Analysen' },
-      ],
+      screens: [{ label: 'Dashboard', desc: 'Alle Ausgaben auf einen Blick' }],
       heading: 'Designed für Klarheit',
     },
     testimonials: {
@@ -56,17 +53,14 @@ export const translations = {
         {
           quote: 'Wir testen Equa seit 2 Wochen in der WG. Klappt super – jeder trägt seine Ausgaben ein und wir sehen sofort wer wem was schuldet.',
           name: 'Lukas M.',
-          role: 'WG-Bewohner',
         },
         {
           quote: 'Für unseren Urlaub mit 4 Freunden super praktisch. Nach dem Setup lief alles reibungslos. Absolute Empfehlung!',
           name: 'Sarah K.',
-          role: 'Reisefreundin',
         },
         {
           quote: 'Einfach gehalten, genau das was ich brauche. Teile Miete und Einkäufe mit meinem Mitbewohner – kein Stress mehr.',
           name: 'Alex T.',
-          role: 'Student',
         },
       ],
     },
@@ -141,10 +135,7 @@ export const translations = {
       ],
     },
     appPreview: {
-      screens: [
-        { label: 'Dashboard', desc: 'All expenses at a glance' },
-        { label: 'Statistics', desc: 'Spending trends and analytics' },
-      ],
+      screens: [{ label: 'Dashboard', desc: 'All expenses at a glance' }],
       heading: 'Designed for clarity',
     },
     testimonials: {
@@ -154,17 +145,14 @@ export const translations = {
         {
           quote: "We've been testing Equa for 2 weeks in our flat. Works great – everyone logs their expenses and we instantly see who owes whom.",
           name: 'Lukas M.',
-          role: 'Flatmate',
         },
         {
           quote: 'Super handy for our vacation with 4 friends. After setup everything ran smoothly. Highly recommended!',
           name: 'Sarah K.',
-          role: 'Travel buddy',
         },
         {
           quote: 'Simple and exactly what I need. Splitting rent and groceries with my roommate – no more stress.',
           name: 'Alex T.',
-          role: 'Student',
         },
       ],
     },
