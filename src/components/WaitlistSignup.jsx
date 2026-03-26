@@ -11,6 +11,7 @@ const STATES = {
   success: 'success',
   duplicate: 'duplicate',
   invalid: 'invalid',
+  config: 'config',
   error: 'error',
 }
 
@@ -32,7 +33,7 @@ export function WaitlistSignup() {
     }
 
     if (!supabase) {
-      setState(STATES.error)
+      setState(STATES.config)
       return
     }
 
@@ -148,6 +149,17 @@ export function WaitlistSignup() {
             className="mt-3 text-sm text-red-600"
           >
             {t.waitlist.error}
+          </motion.p>
+        )}
+        {state === STATES.config && (
+          <motion.p
+            key="config"
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            className="mt-3 text-sm text-red-600"
+          >
+            {t.waitlist.configError ?? t.waitlist.error}
           </motion.p>
         )}
       </AnimatePresence>
