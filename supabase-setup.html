@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Equa Waitlist - Supabase Setup</title>
+  <style>
+    * { box-sizing: border-box; }
+    body { font-family: system-ui, sans-serif; max-width: 720px; margin: 0 auto; padding: 24px; background: #fafaf8; }
+    h1 { font-size: 1.5rem; margin-bottom: 8px; }
+    p { color: #3d4446; margin-bottom: 16px; }
+    pre { background: #1e2324; color: #e4e4e7; padding: 20px; border-radius: 12px; overflow-x: auto; font-size: 13px; line-height: 1.5; }
+    .btn { display: inline-flex; align-items: center; gap: 8px; background: #10b981; color: white; padding: 12px 20px; border-radius: 12px; text-decoration: none; font-weight: 600; margin-right: 12px; margin-bottom: 12px; border: none; cursor: pointer; font-size: 14px; }
+    .btn:hover { background: #059669; }
+    .btn-secondary { background: #1e2324; }
+    .btn-secondary:hover { background: #2d3234; }
+    .steps { background: white; padding: 20px; border-radius: 12px; margin-top: 24px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+    .steps ol { margin: 0; padding-left: 20px; }
+    .steps li { margin-bottom: 12px; color: #3d4446; }
+    .success { color: #10b981; font-weight: 600; }
+  </style>
+</head>
+<body>
+  <h1>Equa Waitlist – Supabase Setup</h1>
+  <p>Führe das folgende SQL in deinem Supabase-Projekt aus, um die Waitlist-Tabelle anzulegen.</p>
+
+  <button class="btn" onclick="copySql()">📋 SQL kopieren</button>
+  <a class="btn btn-secondary" href="https://supabase.com/dashboard/project/wnghdshwpvyzbyfaysrq/sql/new" target="_blank" rel="noopener">
+    → Supabase SQL Editor öffnen
+  </a>
+
+  <pre id="sql">-- Waitlist-Tabelle für Early-Access-Anmeldungen
+CREATE TABLE IF NOT EXISTS public.waitlist (
+  id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+  email text UNIQUE NOT NULL,
+  created_at timestamptz DEFAULT now() NOT NULL,
+  source text DEFAULT 'landingpage',
+  converted_to_user boolean DEFAULT false
+);
+
+-- Row Level Security aktivieren
+ALTER TABLE public.waitlist ENABLE ROW LEVEL SECURITY;
+
+-- Policy: Anonyme Benutzer dürfen nur INSERT (hinzufügen), nicht lesen
+CREATE POLICY "Allow anon insert" ON public.waitlist
+  FOR INSERT
+  TO anon
+  WITH CHECK (true);</pre>
+
+  <div class="steps">
+    <h3>Schritte</h3>
+    <ol>
+      <li>Klicke auf <strong>"→ Supabase SQL Editor öffnen"</strong></li>
+      <li>Klicke auf <strong>"SQL kopieren"</strong> und füge den Inhalt im SQL Editor ein</li>
+      <li>Klicke auf <strong>Run</strong> (oder Strg/Cmd + Enter)</li>
+      <li>Wenn "Success" erscheint, ist die Tabelle angelegt – die Waitlist funktioniert nun.</li>
+    </ol>
+  </div>
+
+  <script>
+    function copySql() {
+      const sql = document.getElementById('sql').textContent;
+      navigator.clipboard.writeText(sql).then(() => {
+        const btn = document.querySelector('button.btn');
+        const orig = btn.textContent;
+        btn.textContent = '✓ Kopiert!';
+        btn.style.background = '#059669';
+        setTimeout(() => { btn.textContent = orig; btn.style.background = ''; }, 2000);
+      });
+    }
+  </script>
+</body>
+</html>
