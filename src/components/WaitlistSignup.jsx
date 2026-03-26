@@ -1,9 +1,10 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { supabase } from '../lib/supabase'
 import { useLang } from '../LanguageContext'
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+const WAITLIST_STORAGE_KEY = 'equa_waitlist_joined_v1'
 
 const STATES = {
   idle: 'idle',
@@ -21,6 +22,17 @@ export function WaitlistSignup() {
   const { t } = useLang()
 
   const isValidEmail = (e) => EMAIL_REGEX.test(e)
+
+  useEffect(() => {
+    try {
+      const raw = localStorage.getItem(WAITLIST_STORAGE_KEY)
+      if (!raw) return
+      const parsed = JSON.parse(raw)
+      if (parsed?.joined === true) setState(STATES.success)
+    } catch {
+      // ignore invalid storage contents
+    }
+  }, [])
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -58,7 +70,21 @@ export function WaitlistSignup() {
         return
       }
 
+      try {
+        localStorage.setItem(
+          WAITLIST_STORAGE_KEY,
+          JSON.stringify({
+            joined: true,
+            email: email.trim().toLowerCase(),
+            joinedAt: new Date().toISOString(),
+          })
+        )
+      } catch {
+        // ignore storage errors (private mode etc.)
+      }
+
       setState(STATES.success)
+      setEmail('')
     } catch (err) {
       console.error('[Waitlist] Error:', err)
       setState(STATES.error)
