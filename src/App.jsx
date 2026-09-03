@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { ArrowRight, Check, HandHeart, Heart, Leaf, List, PaintBrush, SunHorizon, UsersThree, X } from '@phosphor-icons/react'
+import { ArrowRight, Check, HandHeart, Heart, Leaf, List, PaintBrush, UsersThree, X } from '@phosphor-icons/react'
 
 const projects = [
   { title: 'Grüne Höfe', category: 'Umwelt', text: 'Gemeinsam verwandeln wir graue Innenhöfe in lebendige Orte für alle.', image: '/images/hero-community.png', color: 'yellow' },
@@ -20,8 +20,7 @@ function App() {
     <div className="site-shell">
       <header className="topbar">
         <a className="brand" href="#top" aria-label="Sunrise Collective Startseite">
-          <SunHorizon className="brand-icon" size={42} weight="fill" aria-hidden="true" />
-          <span>SUNRISE<br />COLLECTIVE</span>
+          <img className="brand-logo" src="/brand/sunrise-collective-logo.svg" alt="Sunrise Collective" />
         </a>
         <button className="menu-button" onClick={() => setMenuOpen(!menuOpen)} aria-expanded={menuOpen} aria-label="Menü öffnen">
           {menuOpen ? <X size={27} /> : <List size={27} />}
@@ -113,7 +112,7 @@ function App() {
       </main>
 
       <footer>
-        <a className="brand footer-brand" href="#top"><SunHorizon className="brand-icon" size={42} weight="fill" aria-hidden="true" /><span>SUNRISE<br />COLLECTIVE</span></a>
+        <a className="brand footer-brand" href="#top"><img className="brand-logo" src="/brand/sunrise-collective-logo.svg" alt="Sunrise Collective" /></a>
         <p>Eine fiktive Nonprofit-Testorganisation für digitale Wirkung.</p>
         <div><a href="#projekte">Projekte</a><a href="#wirkung">Wirkung</a><a href="mailto:hello@example.org">Kontakt</a></div>
       </footer>

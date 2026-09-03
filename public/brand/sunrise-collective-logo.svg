@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 286 64" role="img" aria-labelledby="title desc">
+  <title id="title">Sunrise Collective</title>
+  <desc id="desc">Eine aufgehende Sonne über Wellen neben dem Schriftzug Sunrise Collective.</desc>
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M17 41a15 15 0 0 1 30 0" fill="#FFD951" stroke="#0B1025" stroke-width="3"/><path d="M32 8v8M10 18l6 6M54 18l-6 6M4 41h56" stroke="#FF5146" stroke-width="4"/><path d="M8 49c8-5 16-5 24 0s16 5 24 0M12 57c7-4 13-4 20 0s13 4 20 0" stroke="#1757DB" stroke-width="4"/></g>
+  <g fill="#0B1025" font-family="Arial, Helvetica, sans-serif" font-weight="800" letter-spacing="1"><text x="76" y="29" font-size="23">SUNRISE</text><text x="76" y="52" font-size="18" letter-spacing="2.8">COLLECTIVE</text></g>
+</svg>
