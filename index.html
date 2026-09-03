@@ -21,6 +21,19 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.whitelabel.ai/widget/stage/widget.css" />
+    <script src="https://cdn.whitelabel.ai/widget/stage/widget.iife.js" defer></script>
+    <script>
+      window.addEventListener('DOMContentLoaded', function () {
+        WhitelabelWidget.setupWidget({
+          config: {
+            baseUrl: 'https://staging.whitelabel.ai',
+            formId: '3085646e-cb61-4aac-83d2-8730e32a7faf',
+            token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7Im9yZ19pZCI6ImNtdGFmamhvNTAwMDAxeW1jbmh2YWF5NGwiLCJ0b2tlbl9pZCI6Ijk0ODNjNGE0LTM3MzYtNDllMi04YWUxLWM2NGI4Y2UwYjE3ZSJ9LCJpYXQiOjE3ODc3NjkwNjN9.SRsMYFSMEBvDZXt_WtfQaXnvc6WkPrfnoBW7MZcDjXk'
+          }
+        });
+      });
+    </script>
   </head>
   <body>
     <div id="root"></div>
