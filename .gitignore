@@ -11,6 +11,10 @@ node_modules
 dist
 dist-ssr
 *.local
+
+# Local visual QA captures
+design-comparison.png
+implementation-*.png
 .env
 .env.local
 
