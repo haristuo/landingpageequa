@@ -6,15 +6,44 @@
     <title>Sunrise Collective – Gemeinsam wirkt mehr</title>
     <meta name="description" content="Eine lebendige Nonprofit-Testorganisation für lokale Projekte, echte Geschichten und digitale Wirkung." />
     <meta name="theme-color" content="#fffaf0" />
+    <meta name="application-name" content="Sunrise Collective" />
+    <meta name="brand-color" content="#ff5146" />
+    <meta name="background-color" content="#fffaf0" />
+    <meta name="text-color" content="#0b1025" />
     <link rel="icon" href="/brand/sunrise-mark.svg" type="image/svg+xml" />
+    <link rel="shortcut icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="apple-touch-icon" href="/brand/sunrise-mark.svg" />
     <meta property="og:title" content="Sunrise Collective" />
+    <meta property="og:site_name" content="Sunrise Collective" />
     <meta property="og:description" content="Wir stärken Nachbarschaften. Heute für morgen." />
     <meta property="og:type" content="website" />
     <meta property="og:image" content="/images/hero-community.png" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Sunrise Collective" />
     <meta name="twitter:description" content="Wir stärken Nachbarschaften. Heute für morgen." />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "NGO",
+        "name": "Sunrise Collective",
+        "url": "https://useequa.com/",
+        "logo": "https://useequa.com/brand/sunrise-collective-logo.svg",
+        "image": "https://useequa.com/images/hero-community.png",
+        "description": "Wir stärken lokale Gemeinschaften und unterstützen Menschen, die ihre Nachbarschaft aktiv gestalten."
+      }
+    </script>
+    <style id="brand-tokens">
+      :root { --brand-primary: #ff5146; --brand-secondary: #ffd951; --brand-background: #fffaf0; --brand-text: #0b1025; --brand-border: #e8e1d3; }
+      body { margin: 0; color: #0b1025; background: #fffaf0; font-family: "DM Sans", Arial, sans-serif; }
+      h1, h2, h3 { font-family: "Syne", Arial, sans-serif; }
+      .initial-brand { min-height: 100vh; background: #fffaf0; color: #0b1025; }
+      .initial-brand__header { padding: 20px 5vw; border-bottom: 1px solid #e8e1d3; background: #fffaf0; }
+      .initial-brand__logo { display: block; width: 179px; height: 40px; }
+      .initial-brand__hero { padding: 12vh 6vw; border-left: 12px solid #ff5146; }
+      .initial-brand__hero h1 { max-width: 850px; margin: 0 0 24px; font-size: clamp(48px, 7vw, 88px); line-height: .95; }
+      .initial-brand__hero p { max-width: 650px; font-size: 20px; line-height: 1.5; }
+      .initial-brand__accent { color: #ff5146; }
+    </style>
     <link rel="stylesheet" href="https://cdn.whitelabel.ai/widget/stage/widget.css" />
     <script src="https://cdn.whitelabel.ai/widget/stage/widget.iife.js" defer></script>
     <script>
@@ -30,7 +59,17 @@
     </script>
   </head>
   <body>
-    <div id="root"></div>
+    <div id="root">
+      <main class="initial-brand">
+        <header class="initial-brand__header">
+          <img class="initial-brand__logo" src="/brand/sunrise-collective-logo.svg" alt="Sunrise Collective" />
+        </header>
+        <section class="initial-brand__hero">
+          <h1>Wir stärken <span class="initial-brand__accent">Nachbarschaften.</span></h1>
+          <p>Sunrise Collective unterstützt Menschen und lokale Projekte, die ihre Gemeinschaft aktiv gestalten.</p>
+        </section>
+      </main>
+    </div>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
