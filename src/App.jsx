@@ -1,135 +1,135 @@
-import { useState, useEffect, lazy, Suspense } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
-import { useLang } from './LanguageContext'
+import { useState } from 'react'
+import { ArrowRight, Check, HandHeart, Heart, Leaf, List, PaintBrush, SunHorizon, UsersThree, X } from '@phosphor-icons/react'
 
-import { Hero } from './sections/Hero'
-import { AppPreview } from './sections/AppPreview'
-
-const Features = lazy(() => import('./sections/Features').then(m => ({ default: m.Features })))
-const HowItWorks = lazy(() => import('./sections/HowItWorks').then(m => ({ default: m.HowItWorks })))
-const Testimonials = lazy(() => import('./sections/Testimonials').then(m => ({ default: m.Testimonials })))
-const CTA = lazy(() => import('./sections/CTA').then(m => ({ default: m.CTA })))
-const Footer = lazy(() => import('./sections/Footer').then(m => ({ default: m.Footer })))
+const projects = [
+  { title: 'Grüne Höfe', category: 'Umwelt', text: 'Gemeinsam verwandeln wir graue Innenhöfe in lebendige Orte für alle.', image: '/images/hero-community.png', color: 'yellow' },
+  { title: 'Farbe verbindet', category: 'Kultur', text: 'Kinder, Künstler:innen und Nachbar:innen gestalten ihre Straße neu.', image: '/images/project-creative.png', color: 'blue' },
+  { title: 'Gärten für alle', category: 'Gemeinschaft', text: 'Hochbeete, Wissen und frische Lebensmittel mitten im Viertel.', image: '/images/project-green.png', color: 'coral' },
+]
 
 function App() {
-  const { t, lang, toggleLang } = useLang()
   const [menuOpen, setMenuOpen] = useState(false)
-
-  const NAV_LINKS = [
-    { href: '#features', label: t.nav.features },
-    { href: '#how-it-works', label: t.nav.howItWorks },
-    { href: '#testimonials', label: t.nav.testimonials },
-    { href: '#hero', label: t.nav.waitlist },
-  ]
-
-  useEffect(() => {
-    document.documentElement.classList.remove('dark')
-    localStorage.removeItem('equa-theme')
-    document.documentElement.lang = lang
-  }, [lang])
+  const [donationOpen, setDonationOpen] = useState(false)
+  const [amount, setAmount] = useState(35)
+  const [donated, setDonated] = useState(false)
+  const [email, setEmail] = useState('')
+  const [subscribed, setSubscribed] = useState(false)
+  const closeMenu = () => setMenuOpen(false)
 
   return (
-    <div className="min-h-screen bg-[#f5f3ef] text-[#1e2324] font-body transition-colors duration-300">
-      <header className="absolute top-0 left-0 right-0 z-40 py-4 px-6">
-        <div className="max-w-7xl mx-auto flex items-center justify-between">
-          <a href="#" className="flex items-center gap-2 w-fit">
-            <img src="/equa-app-icon.png" alt="Equa" className="h-8 w-8 rounded-lg" />
-            <span className="font-heading text-xl font-bold text-[#1e2324] tracking-tight">
-              equa
-            </span>
-          </a>
-
-          {/* Desktop nav */}
-          <nav className="hidden lg:flex items-center gap-8">
-            {NAV_LINKS.map(link => (
-              <a
-                key={link.href}
-                href={link.href}
-                className="text-sm font-medium text-[#3d4446] hover:text-[#10b981] transition-colors"
-              >
-                {link.label}
-              </a>
-            ))}
-            {/* Language toggle */}
-            <button
-              onClick={toggleLang}
-              className="ml-2 px-3 py-1.5 rounded-lg text-xs font-bold uppercase tracking-wider border border-[#e5e2dc] hover:border-[#10b981] text-[#3d4446] hover:text-[#10b981] transition-all"
-            >
-              {lang === 'de' ? 'EN' : 'DE'}
-            </button>
-          </nav>
-
-          {/* Hamburger button (mobile only) */}
-          <div className="flex items-center gap-3 lg:hidden">
-            <button
-              onClick={toggleLang}
-              className="px-2.5 py-1.5 rounded-lg text-xs font-bold uppercase tracking-wider border border-[#e5e2dc] hover:border-[#10b981] text-[#3d4446] hover:text-[#10b981] transition-all"
-            >
-              {lang === 'de' ? 'EN' : 'DE'}
-            </button>
-            <button
-              className="relative w-8 h-8 flex flex-col items-center justify-center gap-[5px]"
-              onClick={() => setMenuOpen(prev => !prev)}
-              aria-label={menuOpen ? 'Close menu' : 'Open menu'}
-              aria-expanded={menuOpen}
-            >
-              <motion.span
-                className="block w-5 h-[2px] bg-[#1e2324] rounded-full origin-center"
-                animate={menuOpen ? { rotate: 45, y: 7 } : { rotate: 0, y: 0 }}
-                transition={{ duration: 0.25 }}
-              />
-              <motion.span
-                className="block w-5 h-[2px] bg-[#1e2324] rounded-full"
-                animate={menuOpen ? { opacity: 0 } : { opacity: 1 }}
-                transition={{ duration: 0.15 }}
-              />
-              <motion.span
-                className="block w-5 h-[2px] bg-[#1e2324] rounded-full origin-center"
-                animate={menuOpen ? { rotate: -45, y: -7 } : { rotate: 0, y: 0 }}
-                transition={{ duration: 0.25 }}
-              />
-            </button>
-          </div>
-        </div>
-
-        {/* Mobile menu overlay */}
-        <AnimatePresence>
-          {menuOpen && (
-            <motion.nav
-              initial={{ height: 0, opacity: 0 }}
-              animate={{ height: 'auto', opacity: 1 }}
-              exit={{ height: 0, opacity: 0 }}
-              transition={{ duration: 0.3, ease: 'easeInOut' }}
-              className="lg:hidden overflow-hidden mt-4 rounded-xl border border-[#e5e5e5] bg-[#f5f3ef]/95 backdrop-blur-md"
-            >
-              <div className="flex flex-col py-3">
-                {NAV_LINKS.map(link => (
-                  <a
-                    key={link.href}
-                    href={link.href}
-                    onClick={() => setMenuOpen(false)}
-                    className="px-5 py-3 text-sm font-medium text-[#3d4446] hover:text-[#10b981] hover:bg-[#10b981]/5 transition-colors"
-                  >
-                    {link.label}
-                  </a>
-                ))}
-              </div>
-            </motion.nav>
-          )}
-        </AnimatePresence>
+    <div className="site-shell">
+      <header className="topbar">
+        <a className="brand" href="#top" aria-label="Sunrise Collective Startseite">
+          <SunHorizon className="brand-icon" size={42} weight="fill" aria-hidden="true" />
+          <span>SUNRISE<br />COLLECTIVE</span>
+        </a>
+        <button className="menu-button" onClick={() => setMenuOpen(!menuOpen)} aria-expanded={menuOpen} aria-label="Menü öffnen">
+          {menuOpen ? <X size={27} /> : <List size={27} />}
+        </button>
+        <nav className={menuOpen ? 'nav open' : 'nav'} aria-label="Hauptnavigation">
+          <a href="#ueber-uns" onClick={closeMenu}>Über uns</a>
+          <a href="#projekte" onClick={closeMenu}>Projekte</a>
+          <a href="#wirkung" onClick={closeMenu}>Wirkung</a>
+          <a href="#geschichten" onClick={closeMenu}>Geschichten</a>
+          <button className="button button-coral nav-cta" onClick={() => { closeMenu(); setDonationOpen(true) }}>Jetzt helfen</button>
+        </nav>
       </header>
 
-      <main>
-        <Hero />
-        <AppPreview />
-        <Suspense fallback={null}>
-          <Features />
-          <HowItWorks />
-          <Testimonials />
-          <CTA />
-          <Footer />
-        </Suspense>
+      <main id="top">
+        <section className="hero" id="ueber-uns">
+          <div className="hero-copy">
+            <p className="eyebrow">Gemeinsam. Lokal. Wirksam.</p>
+            <h1>Wir stärken <span>Nachbarschaften.</span> Heute für morgen.</h1>
+            <p className="hero-intro">Sunrise Collective unterstützt Menschen und Initiativen, die ihre Gemeinschaft aktiv gestalten.</p>
+            <div className="hero-actions">
+              <button className="button button-coral" onClick={() => setDonationOpen(true)}>Jetzt helfen <ArrowRight weight="bold" /></button>
+              <a className="button button-outline" href="#projekte">Projekte entdecken <ArrowRight weight="bold" /></a>
+            </div>
+            <div className="hero-values" aria-label="Unsere Werte">
+              <span><Heart /> Gemeinschaft stärken</span>
+              <span><Leaf /> Chancen eröffnen</span>
+              <span><UsersThree /> Zukunft gestalten</span>
+            </div>
+          </div>
+          <div className="hero-visual">
+            <img src="/images/hero-community.png" alt="Freiwillige arbeiten gemeinsam in einem Nachbarschaftsgarten" />
+            <div className="hero-badge"><Heart weight="fill" /><strong>Zusammen wächst mehr.</strong></div>
+          </div>
+        </section>
+
+        <section className="impact-strip" id="wirkung" aria-label="Unsere Wirkung">
+          <div><Leaf /><strong>128</strong><span>Projekte unterstützt</span></div>
+          <div><UsersThree /><strong>24.500+</strong><span>Menschen erreicht</span></div>
+          <div><HandHeart /><strong>3,2 Mio. €</strong><span>wirksam eingesetzt</span></div>
+          <div><Heart /><strong>3.800+</strong><span>Freiwillige aktiv</span></div>
+        </section>
+
+        <section className="section projects-section" id="projekte">
+          <div className="section-heading">
+            <div><p className="eyebrow">Unsere Projekte</p><h2>Lokale Ideen.<br /><span>Echte Wirkung.</span></h2></div>
+            <p>Wir fördern Ideen, die direkt aus der Gemeinschaft kommen – schnell, partnerschaftlich und mit messbarer Wirkung.</p>
+          </div>
+          <div className="project-grid">
+            {projects.map((project) => (
+              <article className={`project-card ${project.color}`} key={project.title}>
+                <img src={project.image} alt="" />
+                <div className="project-content">
+                  <span>{project.category}</span><h3>{project.title}</h3><p>{project.text}</p>
+                  <a href="#mitmachen" aria-label={`${project.title} unterstützen`}>Projekt unterstützen <ArrowRight weight="bold" /></a>
+                </div>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <section className="story-section" id="geschichten">
+          <div className="story-image"><img src="/images/story-community.png" alt="Menschen verschiedener Generationen bei einer gemeinschaftlichen Aktivität" /></div>
+          <div className="story-copy">
+            <p className="eyebrow">Menschen & Geschichten</p>
+            <blockquote>„Hier habe ich nicht nur einen Garten gefunden, sondern Menschen, die an mich glauben.“</blockquote>
+            <p>Samira kam vor zwei Jahren zu unserem Gartenprojekt. Heute leitet sie selbst Workshops und bringt jede Woche neue Menschen zusammen.</p>
+            <a href="#mitmachen">Gemeinsam aktiv werden <ArrowRight weight="bold" /></a>
+          </div>
+        </section>
+
+        <section className="join-section section" id="mitmachen">
+          <div className="join-copy">
+            <p className="eyebrow light">Mach den Unterschied</p>
+            <h2>Deine Idee.<br />Deine Zeit. Deine Wirkung.</h2>
+            <p>Ob mit einer Spende, deiner Zeit oder einer eigenen Projektidee: Jede Form von Engagement bringt uns weiter.</p>
+            <button className="button button-yellow" onClick={() => setDonationOpen(true)}>Jetzt aktiv werden <ArrowRight weight="bold" /></button>
+          </div>
+          <div className="newsletter">
+            <PaintBrush size={38} weight="duotone" /><h3>Gute Nachrichten für dein Postfach.</h3><p>Einmal im Monat: Menschen, Projekte und Ideen, die Mut machen.</p>
+            {subscribed ? <div className="success-message"><Check weight="bold" /> Danke! Du bist dabei.</div> : (
+              <form onSubmit={(event) => { event.preventDefault(); if (email) setSubscribed(true) }}>
+                <label className="sr-only" htmlFor="email">E-Mail-Adresse</label>
+                <input id="email" type="email" placeholder="deine@email.de" value={email} onChange={(event) => setEmail(event.target.value)} required />
+                <button type="submit" aria-label="Newsletter abonnieren"><ArrowRight weight="bold" /></button>
+              </form>
+            )}
+          </div>
+        </section>
       </main>
+
+      <footer>
+        <a className="brand footer-brand" href="#top"><SunHorizon className="brand-icon" size={42} weight="fill" aria-hidden="true" /><span>SUNRISE<br />COLLECTIVE</span></a>
+        <p>Eine fiktive Nonprofit-Testorganisation für digitale Wirkung.</p>
+        <div><a href="#projekte">Projekte</a><a href="#wirkung">Wirkung</a><a href="mailto:hello@example.org">Kontakt</a></div>
+      </footer>
+
+      {donationOpen && (
+        <div className="modal-backdrop" role="presentation" onMouseDown={() => setDonationOpen(false)}>
+          <section className="donation-modal" role="dialog" aria-modal="true" aria-labelledby="donation-title" onMouseDown={(event) => event.stopPropagation()}>
+            <button className="modal-close" onClick={() => setDonationOpen(false)} aria-label="Dialog schließen"><X size={24} /></button>
+            {donated ? (
+              <div className="donation-success"><span><Check weight="bold" /></span><h2>Danke für deine Hilfe!</h2><p>Dies ist eine Testbestätigung – es wurde keine echte Spende ausgelöst.</p><button className="button button-coral" onClick={() => { setDonated(false); setDonationOpen(false) }}>Zurück zur Seite</button></div>
+            ) : (
+              <><p className="eyebrow">Test-Spende</p><h2 id="donation-title">Gemeinsam mehr bewegen.</h2><p>Wähle einen Betrag, um den Spendenablauf zu testen. Es findet keine Zahlung statt.</p><div className="amounts">{[15, 35, 75, 120].map((value) => <button className={amount === value ? 'selected' : ''} onClick={() => setAmount(value)} key={value}>{value} €</button>)}</div><button className="button button-coral full" onClick={() => setDonated(true)}>{amount} € Test-Spende abschließen <ArrowRight weight="bold" /></button></>
+            )}
+          </section>
+        </div>
+      )}
     </div>
   )
 }
